@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tutorial: Hello dgrid!</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      data-dojo-config="async: 1, dojoBlankHtmlUrl: '/path/to/blank.html'"
+      src="//ajax.googleapis.com/ajax/libs/dojo/1.10.1/dojo/dojo.js"
+      data-dojo-config="async: true, parseOnLoad: true"
+    ></script>
+
+    <script>
+      require({
+        packages: [
+          {
+            name: 'dgrid',
+            location: '//cdn.rawgit.com/SitePen/dgrid/v1.1.0',
+          },
+          {
+            name: 'dstore',
+            location: '//cdn.rawgit.com/SitePen/dstore/v1.1.1',
+          },
+        ],
+      }, [
+        'dojo/_base/declare',
+        'dgrid/Grid',
+        'dgrid/Keyboard',
+        'dgrid/Selection',
+        'dojo/domReady!',
+      ], function(declare, Grid, Keyboard, Selection) {
+        var data = [
+          {first: 'Bob', last: 'Barker', age: 89},
+          {first: 'Vanna', last: 'White', age: 55},
+          {first: 'Pat', last: 'Sajak', age: 65},
+        ];
+        var CustomGrid = declare([Grid, Keyboard, Selection]);
+        var grid = new CustomGrid(
+          {
+            columns: {
+              first: 'First Name',
+              last: 'Last Name',
+              age: 'Age',
+            },
+            selectionMode: 'single',
+            // for Keyboard; allow only row-level keyboard navigation
+            cellNavigation: false,
+          },
+          'grid'
+        );
+        grid.on('.dgrid-row:click', function(event) {
+          var row = grid.row(event);
+          console.log('Row clicked:', row);
+        });
+        grid.renderArray(data);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="grid"></div>
+  </body>
+</html>
