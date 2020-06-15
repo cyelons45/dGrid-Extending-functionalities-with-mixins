@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dgrid": "^1.2.1",
-    "dijit": "^1.15.0",
+    "dijit": "^1.15.4",
     "dojo-dstore": "^1.1.2",
     "dojox": "^1.15.0"
   }
